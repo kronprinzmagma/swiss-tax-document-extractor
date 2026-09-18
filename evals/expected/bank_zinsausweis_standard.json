@@ -1,0 +1,36 @@
+{
+  "institut": {
+    "value": "ZKB Zürcher Kantonalbank",
+    "anchor_present": true
+  },
+  "kontoinhaber_name": {
+    "value": "Hans Muster",
+    "anchor_present": true
+  },
+  "bruttoertrag": {
+    "value": "1'250.00",
+    "anchor_present": true
+  },
+  "vermoegensstand_3112": {
+    "value": "85'420.00",
+    "anchor_present": true
+  },
+  "verrechnungssteuer": {
+    "value": "437.50",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "konto_nr_redacted": {
+    "value": "XXXX-1234",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "bank_zinsausweis",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "mann"
+  }
+}

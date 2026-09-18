@@ -1,0 +1,28 @@
+{
+  "kasse": {
+    "value": "Helsana",
+    "anchor_present": true
+  },
+  "versicherte_person_name": {
+    "value": "Lina Muster",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "praemie_kvg_total": {
+    "value": "1'080.00",
+    "anchor_present": true
+  },
+  "praemie_vvg_total": {
+    "value": "240.00",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "kk_praemienbescheinigung",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "kind1"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "arbeitgeber": {
+    "value": "ACME AG, 8000 Zürich",
+    "anchor_present": true
+  },
+  "periode_von": {
+    "value": "01.01.2024",
+    "anchor_present": true
+  },
+  "periode_bis": {
+    "value": "31.12.2024",
+    "anchor_present": true
+  },
+  "bruttolohn_pos8": {
+    "value": "95'400.00",
+    "anchor_present": true
+  },
+  "ahv_alv_nbu_abzug_pos9": {
+    "value": "5'056.20",
+    "anchor_present": true
+  },
+  "bvg_abzug_pos10a": {
+    "value": "10'843.80",
+    "anchor_present": true
+  },
+  "nettolohn_pos11": {
+    "value": "79'500.00",
+    "anchor_present": true
+  },
+  "quellensteuer_pos12": null,
+  "_meta": {
+    "font": "Inter",
+    "level": "L2-custom-font"
+  }
+}

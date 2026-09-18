@@ -1,0 +1,32 @@
+{
+  "institut": {
+    "value": "ZKB Zürcher Kantonalbank",
+    "anchor_present": true
+  },
+  "kontoinhaber_name": {
+    "value": "Hans und Maria Muster",
+    "anchor_present": true
+  },
+  "bestand_3112": {
+    "value": "215'600.00",
+    "anchor_present": true
+  },
+  "bruttoertrag_total": {
+    "value": "3'200.00",
+    "anchor_present": true
+  },
+  "verrechnungssteuer_total": {
+    "value": "1'120.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "wertschriftenverzeichnis",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "gemeinsam"
+  }
+}
