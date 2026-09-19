@@ -1,0 +1,28 @@
+{
+  "leistungserbringer": {
+    "value": "Dr. med. Hans Meier, Zürich",
+    "anchor_present": true
+  },
+  "person_name": {
+    "value": "Maria Muster",
+    "anchor_present": true
+  },
+  "betrag": {
+    "value": "285.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "kategorie": {
+    "value": "Arzt",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "krankheitskosten",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "frau"
+  }
+}

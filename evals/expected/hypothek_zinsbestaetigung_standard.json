@@ -1,0 +1,32 @@
+{
+  "institut": {
+    "value": "BANK-Z",
+    "anchor_present": true
+  },
+  "kontoinhaber_name": {
+    "value": "Hans und Maria Muster",
+    "anchor_present": true
+  },
+  "liegenschaft": {
+    "value": "EFH Bahnhofstr. 10, 8001 Zürich",
+    "anchor_present": true
+  },
+  "schuldzinsen": {
+    "value": "8'400.00",
+    "anchor_present": true
+  },
+  "schuldsaldo_3112": {
+    "value": "420'000.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "hypothek_zinsbestaetigung",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "gemeinsam"
+  }
+}
