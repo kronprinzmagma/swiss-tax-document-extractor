@@ -1,0 +1,36 @@
+{
+  "institut": {
+    "value": "BANK-U AG",
+    "anchor_present": true
+  },
+  "kontoinhaber_name": {
+    "value": "Hans Muster",
+    "anchor_present": true
+  },
+  "bestand_3112": {
+    "value": "850'000.00",
+    "anchor_present": true
+  },
+  "bruttoertrag_total": {
+    "value": "12'400.00",
+    "anchor_present": true
+  },
+  "verrechnungssteuer_total": {
+    "value": "4'340.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "depot_nr_redacted": {
+    "value": "XXXX-9876",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "wertschriftenverzeichnis",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "mann"
+  }
+}

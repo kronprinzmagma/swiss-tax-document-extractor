@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Steuerwerte einsetzen",
+  "version": "1.0.0",
+  "description": "Zeigt die selbst geprüften Steuerwerte neben ZHprivateTax und setzt sie auf Klick ins Formular. Lokal, ohne Netzwerkverbindung.",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://zhp.services.zh.ch/*",
+        "https://*.services.zh.ch/*",
+        "https://zhprivatetax.ch/*",
+        "https://*.zhprivatetax.ch/*"
+      ],
+      "js": ["panel.js"],
+      "css": ["panel.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
