@@ -1,0 +1,28 @@
+{
+  "leistungserbringer": {
+    "value": "Apotheke zur Krone",
+    "anchor_present": true
+  },
+  "person_name": {
+    "value": "Tim Muster",
+    "anchor_present": true
+  },
+  "betrag": {
+    "value": "87.50",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "kategorie": {
+    "value": "Medikament",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "krankheitskosten",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "kind2"
+  }
+}

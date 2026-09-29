@@ -1,0 +1,46 @@
+# Belege bleiben strikt lokal — Privacy-Constraint
+belege/
+output/
+aussteller.json
+aussteller.json.bak
+family.yaml
+privacy_secrets.local.yaml
+privacy_secrets.local.yaml.bak
+
+# Eval-Fixtures: synthetische PDFs werden generiert, nicht commitet
+evals/fixtures/*.pdf
+
+# Anonymisierte Echtbeleg-Samples — lokal, NICHT eingecheckt
+evals/samples_real/
+evals/samples_real_*/
+
+# Eval-Fonts: lokal abgelegt (OFL-Lizenz-Hygiene), nicht commitet
+evals/fonts/*.ttf
+evals/fonts/*.otf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Agent-Harness-Zustand
+.claude/
+.gsd/
+
+# Steueraufstellung-Beispiele (enthalten teils echte Daten) — nie committen
+*.numbers
+privacy_secrets.vorschlag.yaml
+probe_review.html

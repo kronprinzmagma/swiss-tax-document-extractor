@@ -1,0 +1,28 @@
+{
+  "stiftung": {
+    "value": "STIFTUNG-V",
+    "anchor_present": true
+  },
+  "kontoinhaber_name": {
+    "value": "Maria Muster",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "einzahlung_betrag": {
+    "value": "5'500.00",
+    "anchor_present": true
+  },
+  "valutadatum": {
+    "value": "28.12.2024",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "saeule_3a",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "frau"
+  }
+}

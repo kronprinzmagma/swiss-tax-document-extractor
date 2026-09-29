@@ -1,0 +1,41 @@
+# Fuehrt die Testsuite bei jedem Push und PR aus.
+#
+# Bis 2026-08-18 hatte dieses Repo gar keine CI: 630 Tests lagen im Repo und
+# liefen ausschliesslich, wenn jemand sie von Hand startete. Genau diese Luecke
+# hat in verkaufshilfe-via-foto dazu gefuehrt, dass ein kaputter Build wochenlang
+# unbemerkt blieb, waehrend gruene Tests danebenlagen.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Abhaengigkeiten installieren
+        run: uv sync --extra dev
+
+      # pyproject setzt testpaths=["evals"] und schliesst per addopts den
+      # Marker llm_full aus (Tests, die echte LLM-Calls brauchen).
+      - name: Tests
+        run: uv run pytest
+
+      # Nicht blockierend: ruff meldet hier aktuell 279 Findings (Stilschuld,
+      # sichtbar geworden durch den Sprung 0.15 -> 0.16). Sobald die
+      # abgearbeitet sind, --exit-zero entfernen und das Gate scharf schalten.
+      - name: Lint (Bericht, nicht blockierend)
+        run: uv run ruff check --output-format=github --exit-zero .

@@ -1,0 +1,29 @@
+# Pre-Commit-Hooks fuer steuer-extraktor.
+#
+# Installation:
+#   pip install -e ".[dev]"
+#   pre-commit install
+#
+# Manueller Lauf:
+#   pre-commit run --all-files
+#
+# Zwei Schutzschichten:
+#   1. ruff  — Linting (schnell, Python-Style/Bugs)
+#   2. privacy_gate — blockiert Commits, die rohe PII (Namen, IBAN, AHV,
+#      Telefon, Adressen) in gestagten Dateien enthalten (Privacy-Constraint).
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.7
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+  - repo: local
+    hooks:
+      - id: privacy-gate
+        name: privacy_gate (kein PII-Leak in gestagten Dateien)
+        entry: python scripts/privacy_gate.py --staged
+        language: system
+        pass_filenames: false
+        always_run: true

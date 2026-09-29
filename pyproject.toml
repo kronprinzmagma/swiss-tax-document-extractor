@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "steuer-extraktor"
+version = "0.1.0"
+description = "PDFs in steuerrelevante Tabellen extrahieren — lokal, mit Textankern."
+requires-python = ">=3.11"
+dependencies = [
+    "zxing-cpp>=2.2",      # PDF417 des eSteuerauszugs (eCH-0196)
+    "pypdf>=5",            # eingebettete XML-Anhaenge im PDF
+    "pdfplumber>=0.11",
+    "pyyaml>=6.0",
+    "pydantic>=2.7",
+    "openpyxl>=3.1",  # Steueraufstellung-xlsx-Generator (build_steueraufstellung.py)
+    "rich>=13.7",
+    "ollama>=0.3",
+    "click>=8.1",
+    "idna>=3.15",  # CVE-2026-45409 — transitive via httpx/anyio, hier explizit gepinnt
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "reportlab>=4.0",
+    # Gepinnt (2026-08-18): mit "ruff>=0.5" hob der Sprung 0.15.12 -> 0.16.3
+    # die Findings von 62 auf 279, ohne dass sich eine Zeile Code aenderte.
+    # Ein Linter mit offener Obergrenze macht die Codequalitaet vom
+    # Release-Zyklus des Linters abhaengig. Dependabot hebt die Version
+    # kontrolliert als eigener PR an.
+    "ruff==0.16.3",
+    "pre-commit>=3.7",
+]
+ocr = [
+    "ocrmypdf>=16.0",
+]
+cloud = [
+    "anthropic>=0.40",
+]
+
+[project.scripts]
+steuer-extraktor = "steuer_extraktor:main"
+
+# Flache Struktur (CLAUDE.md): ein Top-Level-Modul + das extractors-Package.
+# setuptools-Auto-Discovery scheitert an mehreren Top-Level-Verzeichnissen
+# (scripts/, evals/), daher explizit deklarieren. scripts/ und evals/ werden
+# via PYTHONPATH=. ausgeführt, nicht installiert.
+[tool.setuptools]
+py-modules = ["steuer_extraktor"]
+packages = ["extractors"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["evals"]
+# Default-Lauf ist DETERMINISTISCH: keine Ollama-Tests. Volle LLM-Suite
+# explizit via `pytest -m ""` (alle Marker) oder `pytest -m llm_full`
+# (nur die LLM-Tests). evals/test_extraction.py traegt pytestmark=llm_full
+# am Modulkopf, sodass `-m "not llm_full"` die ~52 Ollama-Tests deselektiert.
+addopts = '-ra -m "not llm_full"'
+# Pitfall 4 aus 03-RESEARCH.md: 17+ neue LLM-Eval-Fixtures × Ollama-Call (~30s)
+# ergeben ~10-15 min Laufzeit. Default `pytest` läuft non-LLM (schnell);
+# volle LLM-Suite explizit via `pytest -m llm_full`.
+markers = [
+    "llm_full: vollständige LLM-Eval-Suite gegen Ollama (Phase-3 17+ Fixtures × ~30s ≈ 10-15 min). Default-Lauf von pytest läuft ohne diesen Marker.",
+]

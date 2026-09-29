@@ -1,0 +1,8 @@
+{
+  "model": "qwen2.5:7b-instruct-q4_K_M",
+  "model_tag_pinned": "qwen2.5:7b-instruct-q4_K_M",
+  "digest": "845dbda0ea48",
+  "digest_kind": "short",
+  "captured_at": "2026-05-09",
+  "note": "Drift-Protection per D-B4. Bei Mismatch: pytest fails loud. Re-Baseline nur nach manueller Review der Eval-Outputs. Der Digest ist die Kurzform aus `ollama list` (12 Hex-Zeichen) — die volle 64-stellige SHA war auf dem User-System nicht abrufbar. Vergleich erfolgt entsprechend mit der Kurzform-Substring-Logik (siehe evals/conftest.py)."
+}
