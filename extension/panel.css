@@ -1,0 +1,104 @@
+/* Die Leiste liegt über der Seite, nicht darin — sie darf das Formular
+   nirgends verschieben. Alle Regeln sind auf #stx-panel eingeschränkt, damit
+   sie die Seite selbst nicht anfassen. */
+
+#stx-panel {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: 390px;
+  max-height: calc(100vh - 24px);
+  display: flex;
+  flex-direction: column;
+  z-index: 2147483000;
+  background: #fff;
+  color: #14181f;
+  border: 1px solid #c8cdd6;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#stx-panel.zu { max-height: 42px; overflow: hidden; }
+
+#stx-panel .kopf {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-bottom: 1px solid #e3e6ec;
+  cursor: move; user-select: none; flex: 0 0 auto;
+}
+#stx-panel .kopf b { font-size: 13px; }
+#stx-panel .kopf .fort { margin-left: auto; color: #5b6472; font-size: 12px; }
+#stx-panel .kopf button {
+  border: 0; background: transparent; cursor: pointer; font-size: 15px;
+  color: #5b6472; padding: 2px 5px; border-radius: 5px;
+}
+#stx-panel .kopf button:hover { background: #eef0f4; }
+
+#stx-panel .suche { padding: 8px 12px; border-bottom: 1px solid #e3e6ec; }
+#stx-panel .suche input {
+  width: 100%; box-sizing: border-box; padding: 6px 9px;
+  border: 1px solid #c8cdd6; border-radius: 6px; font: inherit;
+}
+
+#stx-panel .inhalt { overflow-y: auto; padding: 4px 0 10px; flex: 1 1 auto; }
+
+#stx-panel .hinweis { padding: 14px 12px; color: #5b6472; }
+#stx-panel .hinweis button {
+  margin-top: 8px; padding: 6px 12px; border-radius: 6px;
+  border: 1px solid #c8cdd6; background: #f6f7f9; cursor: pointer; font: inherit;
+}
+
+#stx-panel h4 {
+  margin: 12px 12px 4px; font-size: 12px; text-transform: uppercase;
+  letter-spacing: .04em; color: #5b6472;
+}
+#stx-panel .block { margin: 0 8px 8px; border: 1px solid #e3e6ec; border-radius: 8px; }
+#stx-panel .block > p {
+  margin: 0; padding: 6px 10px; background: #f6f7f9;
+  border-bottom: 1px solid #e3e6ec; border-radius: 7px 7px 0 0;
+  font-weight: 600; font-size: 12px;
+}
+#stx-panel .wert {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+  border-top: 1px solid #f0f2f5;
+}
+#stx-panel .wert:first-of-type { border-top: 0; }
+#stx-panel .wert.fertig { opacity: .5; }
+#stx-panel .wert .bez { flex: 1 1 auto; min-width: 0; }
+#stx-panel .wert .bez span { display: block; color: #5b6472; font-size: 11px; }
+#stx-panel .wert .betrag {
+  font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600;
+}
+#stx-panel .wert button {
+  border: 1px solid #c8cdd6; background: #fff; border-radius: 6px;
+  padding: 3px 8px; cursor: pointer; font: inherit; white-space: nowrap;
+}
+#stx-panel .wert button:hover { background: #eef0f4; }
+#stx-panel .wert.rechnet { background: #fff8e6; }
+#stx-panel .wert.rechnet .warn { color: #8a6100; font-size: 11px; }
+
+#stx-panel .fuss {
+  padding: 7px 12px; border-top: 1px solid #e3e6ec; color: #5b6472;
+  font-size: 11px; flex: 0 0 auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  #stx-panel { background: #1b1f27; color: #e8eaee; border-color: #333a45; }
+  #stx-panel .kopf, #stx-panel .suche, #stx-panel .fuss { border-color: #333a45; }
+  #stx-panel .block { border-color: #333a45; }
+  #stx-panel .block > p { background: #232833; border-color: #333a45; }
+  #stx-panel .wert { border-color: #262c36; }
+  #stx-panel .wert button, #stx-panel .suche input, #stx-panel .hinweis button {
+    background: #232833; color: #e8eaee; border-color: #3c4350;
+  }
+  #stx-panel .wert.rechnet { background: #33280f; }
+  #stx-panel .wert.rechnet .warn { color: #e0b355; }
+}
+
+/* Eine Zeile des Wertschriftenverzeichnisses: mehrere Spalten, in der
+   Reihenfolge des Formulars. */
+#stx-panel .block.zeile340 > p .zn {
+  display: block; font-weight: 400; color: #5b6472; font-size: 11px;
+}
+#stx-panel .wert.leer { opacity: .55; }
+#stx-panel .wert .warn { color: #8a6100; font-size: 11px; white-space: nowrap; }
