@@ -1,0 +1,28 @@
+{
+  "anbieter": {
+    "value": "EB Zürich",
+    "anchor_present": true
+  },
+  "person_name": {
+    "value": "Hans Muster",
+    "anchor_present": true
+  },
+  "betrag": {
+    "value": "1'850.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "kursart": {
+    "value": "Weiterbildung",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "berufsauslagen",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "mann"
+  }
+}
