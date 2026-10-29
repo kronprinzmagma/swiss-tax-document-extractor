@@ -1,0 +1,28 @@
+{
+  "empfaenger": {
+    "value": "WWF Schweiz",
+    "anchor_present": true
+  },
+  "spender_name": {
+    "value": "Maria Muster",
+    "anchor_present": true
+  },
+  "betrag": {
+    "value": "500.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "steuerbefreiungs_status": {
+    "value": "Die Organisation ist als gemeinnützig anerkannt",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "spenden",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "frau"
+  }
+}

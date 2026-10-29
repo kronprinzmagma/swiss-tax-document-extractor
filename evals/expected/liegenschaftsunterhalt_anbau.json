@@ -1,0 +1,31 @@
+{
+  "handwerker_anbieter": {
+    "value": "BauPlan Schweiz GmbH",
+    "anchor_present": true
+  },
+  "eigentuemer_name": {
+    "value": "Maria Muster",
+    "anchor_present": true
+  },
+  "liegenschaft": {
+    "value": "EFH Bahnhofstr. 10, 8001 Zürich",
+    "anchor_present": true
+  },
+  "betrag": {
+    "value": "42'500.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "werterhaltend": null,
+  "_meta": {
+    "belegtyp": "liegenschaftsunterhalt",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "frau",
+    "expected_werterhaltend": false,
+    "beschreibung": "Anbau Wintergarten gemäss Offerte"
+  }
+}
