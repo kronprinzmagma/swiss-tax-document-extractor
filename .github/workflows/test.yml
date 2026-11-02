@@ -1,0 +1,127 @@
+# Fuehrt die Testsuite bei jedem Push und PR aus.
+#
+# Bis 2026-08-18 hatte dieses Repo gar keine CI: 630 Tests lagen im Repo und
+# liefen ausschliesslich, wenn jemand sie von Hand startete. Genau diese Luecke
+# hat in verkaufshilfe-via-foto dazu gefuehrt, dass ein kaputter Build wochenlang
+# unbemerkt blieb, waehrend gruene Tests danebenlagen.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Abhaengigkeiten installieren
+        run: uv sync --extra dev
+
+      # pyproject setzt testpaths=["evals"] und schliesst per addopts den
+      # Marker llm_full aus (Tests, die echte LLM-Calls brauchen).
+      - name: Tests
+        run: uv run pytest
+
+      # Nicht blockierend: ruff meldet hier aktuell 279 Findings (Stilschuld,
+      # sichtbar geworden durch den Sprung 0.15 -> 0.16). Sobald die
+      # abgearbeitet sind, --exit-zero entfernen und das Gate scharf schalten.
+      - name: Lint (Bericht, nicht blockierend)
+        run: uv run ruff check --output-format=github --exit-zero .
+
+  # Merged Dependabot-PRs selbst, sobald die Jobs oben gruen sind, aber nur, wenn
+  # sich im Lockfile ausschliesslich Patch- und Minor-Versionen aendern. Alles andere
+  # bekommt das Label `manuell-pruefen` und einen Kommentar mit dem Grund. Bis
+  # 2026-10-23 blieb ein nicht gemergter PR still gruen liegen (#20/#21 in cv-tailor).
+  # Er laeuft auch bei roten Tests (nur nicht bei abgebrochenen Laeufen), damit auch
+  # dann ein Label entsteht; gemergt wird nur, wenn alle Jobs unter `needs` gruen sind.
+  #
+  # Warum ein eigener Job: GitHubs Auto-Merge braucht Required Checks, die es fuer
+  # private Repos ohne Pro-Plan nicht gibt; darum wartet er per `needs`.
+  # Nur im privaten Repo aktiv, nie in einem oeffentlichen Spiegel.
+  dependabot-merge:
+    name: Dependabot-Merge (patch/minor)
+    needs: [test]
+    if: >-
+      !cancelled()
+      && github.event_name == 'pull_request'
+      && github.event.pull_request.user.login == 'dependabot[bot]'
+      && github.event.repository.private
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      TESTS_OK: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'skipped') }}
+    steps:
+      # Merge-Commit plus Eltern: HEAD^1 ist der Stand von main.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      # Nicht dependabot/fetch-metadata: das liefert fuer gruppierte PRs
+      # update-type null. Der Typ kommt aus dem Lockfile-Diff; ein Major-Sprung
+      # irgendwo im Lock haelt den PR an, auch ein transitiver. PRs ohne
+      # Lock-Aenderung (github-actions) ergeben "none" und gehen zur Pruefung von Hand.
+      - name: Update-Typ aus dem Lockfile bestimmen
+        id: lock
+        run: |
+          git show HEAD^1:uv.lock > "$RUNNER_TEMP/base.lock"
+          python3 .github/scripts/lock_update_type.py "$RUNNER_TEMP/base.lock" uv.lock \
+            2> "$RUNNER_TEMP/aenderungen.txt" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/aenderungen.txt"
+
+      - name: Mergen
+        id: merge
+        if: steps.lock.outputs.update-type == 'minor-patch' && env.TESTS_OK == 'true'
+        run: gh pr merge --squash --delete-branch "$PR_URL"
+
+      - name: Halt sichtbar machen
+        if: steps.lock.outputs.update-type != 'minor-patch' || env.TESTS_OK != 'true'
+        env:
+          TYP: ${{ steps.lock.outputs.update-type }}
+        run: |
+          gh label create manuell-pruefen --color d93f0b \
+            --description "Dependabot-PR, den die Merge-Automatik nicht merged" 2>/dev/null || true
+          gh pr edit "$PR_URL" --add-label manuell-pruefen
+          {
+            if [ "$TESTS_OK" != "true" ]; then
+              echo "Nicht automatisch gemergt: Tests oder Build sind rot. Bitte die fehlgeschlagenen Checks ansehen."
+              echo "Update-Typ im Lockfile: \`$TYP\`."
+            elif [ "$TYP" = "major" ]; then
+              echo "Nicht automatisch gemergt, Update-Typ im Lockfile: \`$TYP\`."
+              echo "Mindestens ein Major-Sprung, auch transitive zaehlen. Bitte von Hand pruefen und mergen oder schliessen."
+            else
+              echo "Nicht automatisch gemergt, Update-Typ im Lockfile: \`$TYP\`."
+              echo "Kein Paket im Lockfile geaendert (zum Beispiel ein github-actions-Update). Bitte von Hand pruefen."
+            fi
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/aenderungen.txt"
+            echo '```'
+          } > "$RUNNER_TEMP/kommentar.md"
+          gh pr comment "$PR_URL" --edit-last --body-file "$RUNNER_TEMP/kommentar.md" 2>/dev/null \
+            || gh pr comment "$PR_URL" --body-file "$RUNNER_TEMP/kommentar.md"
+
+      # Ein Merge mit dem GITHUB_TOKEN loest keine push-Workflows aus. Ohne diesen
+      # Schritt bekaeme der oeffentliche Spiegel den Fix erst beim naechsten Push.
+      - name: Public-Sync anstossen
+        if: steps.merge.outcome == 'success'
+        run: gh workflow run sync-public.yml --ref main

@@ -1,0 +1,24 @@
+{
+  "stiftung": {
+    "value": "STIFTUNG-V",
+    "anchor_present": true
+  },
+  "kontoinhaber_name": {
+    "value": "Hans Muster",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "einzahlung_betrag": {
+    "value": "7'056.00",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "saeule_3a",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "mann"
+  }
+}
