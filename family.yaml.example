@@ -1,0 +1,24 @@
+# Diese Datei ist PII-frei und committed. Echte family.yaml ist gitignored.
+#
+# Familien-Konfiguration für Person-Inferenz pro Beleg (D-A1..A6, 02-CONTEXT.md).
+# Roles sind closed enum: mann | frau | kind1 | kind2 (D-A5).
+# Die echte Datei wird im Arbeitsverzeichnis als `family.yaml` abgelegt und
+# niemals committed (siehe .gitignore-Eintrag).
+# AHV-Feld bewusst weggelassen — optional, mit Privacy-Warnung im Report (D-A4).
+members:
+  - role: mann
+    first_name: Max
+    last_name: Beispiel
+    birth_date: 1980-05-15
+  - role: frau
+    first_name: Anna
+    last_name: Beispiel
+    birth_date: 1982-08-22
+  - role: kind1
+    first_name: Lina
+    last_name: Beispiel
+    birth_date: 2015-03-10
+  - role: kind2
+    first_name: Tim
+    last_name: Beispiel
+    birth_date: 2018-11-05

@@ -1,0 +1,32 @@
+{
+  "institut": {
+    "value": "BANK-R",
+    "anchor_present": true
+  },
+  "kontoinhaber_name": {
+    "value": "Hans Muster",
+    "anchor_present": true
+  },
+  "liegenschaft": {
+    "value": "ETW Seefeldstr. 22, 8008 Zürich",
+    "anchor_present": true
+  },
+  "schuldzinsen": {
+    "value": "5'600.00",
+    "anchor_present": true
+  },
+  "schuldsaldo_3112": {
+    "value": "350'000.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "hypothek_zinsbestaetigung",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "mann"
+  }
+}
