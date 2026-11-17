@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Steuerwerte einsetzen",
+  "version": "2.3.0",
+  "description": "Zeigt die selbst geprüften Steuerwerte im Seitenteil neben ZHprivateTax und setzt sie auf Klick ins Formular. Lokal, ohne Netzwerkverbindung.",
+  "permissions": ["storage", "sidePanel"],
+  "side_panel": { "default_path": "panel.html" },
+  "action": { "default_title": "Steuerwerte – Seitenteil öffnen" },
+  "background": { "service_worker": "hintergrund.js" },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://zhp.services.zh.ch/*",
+        "https://*.services.zh.ch/*",
+        "https://zhprivatetax.ch/*",
+        "https://*.zhprivatetax.ch/*"
+      ],
+      "js": ["seite.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
