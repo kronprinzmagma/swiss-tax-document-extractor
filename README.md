@@ -8,15 +8,9 @@ Turn a folder of Swiss tax documents (PDF) into one transfer table for the Canto
 
 > **About this repository:** Public, sanitised snapshot of a private working repo that the author uses for a real tax return in the Canton of Zurich. The code is the same apart from anonymised names and markers; this repo ships without the private evaluation corpus of anonymised real documents and without the planning notes. Synthetic test documents for every supported type can be generated locally with `python -m evals.generate`.
 
-<!-- HERO-VISUAL — bitte hier ein Bild einfuegen (staerkster visueller Hebel):
-     Screenshot der Review-Oberflaeche oder der Uebertragungstabelle mit
-     SYNTHETISCHEN Daten (Konfidenz-Faerbung, Bildausschnitt mit rot
-     umrandetem Wert, Summe je Ziffer).
-     1. Bild ablegen unter  docs/demo-review.png  (Pfad zu WHITELIST_FILES in
-        scripts/sync_to_public.py hinzufuegen).
-     2. Folgende Zeile einkommentieren:
-![Review UI with synthetic data](docs/demo-review.png)
--->
+![Staged tax review: two synthetic bank values, confidence labels, confirmation controls and PDF source crops with red amount boxes](docs/demo-review.png)
+
+*Staged review UI with synthetic values and a generated test PDF. Red source boxes are rendered from the PDF; extraction responses are fixtures. [Visual provenance](docs/hero-visual.md).*
 
 ---
 
