@@ -1,0 +1,20 @@
+# Test-Fixture für Person-Inferenz-Evals (Plan 02-02).
+# PII-frei: synthetische Namen ("Muster"), keine echten Daten.
+# Bewusst andere Namen als family.yaml.example, damit Eval-Tests stabil/deterministisch bleiben.
+members:
+  - role: mann
+    first_name: Hans
+    last_name: Muster
+    birth_date: 1980-05-15
+  - role: frau
+    first_name: Maria
+    last_name: Muster
+    birth_date: 1982-08-22
+  - role: kind1
+    first_name: Lina
+    last_name: Muster
+    birth_date: 2015-03-10
+  - role: kind2
+    first_name: Tim
+    last_name: Muster
+    birth_date: 2018-11-05
