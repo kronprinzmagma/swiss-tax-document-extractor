@@ -1,0 +1,28 @@
+{
+  "anbieter": {
+    "value": "Kita Sonnenschein",
+    "anchor_present": true
+  },
+  "kind_name": {
+    "value": "Lina Muster",
+    "anchor_present": true
+  },
+  "betrag": {
+    "value": "18'500.00",
+    "anchor_present": true
+  },
+  "jahr": {
+    "value": "2024",
+    "anchor_present": true
+  },
+  "betreuungs_typ": {
+    "value": "Kita",
+    "anchor_present": true
+  },
+  "_meta": {
+    "belegtyp": "kinderbetreuung",
+    "level": "L1-clean",
+    "font": "Helvetica",
+    "expected_person": "kind1"
+  }
+}

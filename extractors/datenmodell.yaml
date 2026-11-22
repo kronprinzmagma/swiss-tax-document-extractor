@@ -1,0 +1,42 @@
+# Datenmodell: maschinenlesbare Vorgaben, die der Code zur Laufzeit liest
+# (extractors/datenmodell.py). Liegt im Code statt in , weil der
+# oeffentliche Spiegel ohne  sonst nicht lauffaehig ist (2026-10-28).
+# Herleitung und Begruendung der Regeln: DATENMODELL.md.
+# Keine Personendaten hier: Personen sind nur Rollen.
+
+ordner_typen:
+  konten: [bank_zinsausweis, hypothek_zinsbestaetigung]
+  konto: [bank_zinsausweis, hypothek_zinsbestaetigung]
+  wertschriften: [wertschriftenverzeichnis]
+  wertschrift: [wertschriftenverzeichnis]
+  krankenkassen: [kk_praemienbescheinigung, krankheitskosten]
+  krankenkasse: [kk_praemienbescheinigung, krankheitskosten]
+  einkuenfte: [lohnausweis, unknown]
+  einkunft: [lohnausweis, unknown]
+  einkommen: [lohnausweis, unknown]
+  lohn: [lohnausweis, unknown]
+
+# Was die Leiste je Dokumenttyp zeigen muss (Titel der Felder/Werte).
+pflicht_je_typ:
+  lohnausweis: [Nettolohn, Arbeitgeber, Anstellung von, Anstellung bis]
+  bank_zinsausweis: [Bank, Konto-/Depot-Nr., Total Guthaben, Ertrag]
+  wertschriftenverzeichnis: [Bank, Konto-/Depot-Nr., Total Steuerwert, Ertrag, Zugehörigkeit]
+  hypothek_zinsbestaetigung: [Gläubiger mit Adresse, Zinssatz, Schuld am 31.12., Schuldzinsen]
+  kk_praemienbescheinigung: [Prämie oder Kosten]
+  saeule_3a: [Einzahlung, Person]
+  kinderbetreuung: [Betrag je Kind, Person]
+
+personen:
+  rollen: [elternteil_1, elternteil_2, kind_1, kind_2]
+  krankenkasse_dokumente:
+    elternteil_1: 2
+    elternteil_2: 2
+    kind_1: 1
+    kind_2: 1
+  # Grundprämie unter dieser Grenze: fast leer, prüfen (Verbilligung,
+  # Franchise und Modell drücken sie stark — keine Sollgrösse).
+  kvg_fast_leer:
+    erwachsene: 300
+    kinder: 150
+  saeule_3a_maximum: 7258
+  kita_maximum_je_kind: 25000
